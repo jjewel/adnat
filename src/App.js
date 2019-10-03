@@ -1,26 +1,58 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import {BrowserRouter, Route} from 'react-router-dom';
+import axios from 'axios';
+import Header from './components/Header';
+import LogIn from './components/LogIn';
+import SignUp from './components/SignUp';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export class App extends Component {
+  state = {
+    sessionId: ""
+  }
+
+  logIn = (email, password) => {
+    axios.post(
+      'http://localhost:3000/auth/login', 
+      {email, password}, 
+      {headers: {'Content-Type': 'application/json'}}
+    )
+    .then(response => {console.log(response)})
+    .catch(error => {console.log(error)});
+  }
+
+  signUp = (name, email, password, passwordConfirmation) => {
+    console.log({name, email, password, passwordConfirmation});
+  }
+
+  render() {
+    return (
+      <BrowserRouter>
+        <div className="App">
+          <Header />
+          <Route
+            exact 
+            path="/"
+            render={props => (
+              <React.Fragment>      
+                <LogIn logIn={this.logIn} />
+              </React.Fragment>
+            )}
+          />
+          <Route
+            exact 
+            path="/signup"
+            render={props => (
+              <React.Fragment>
+                <SignUp signUp={this.signUp} />
+              </React.Fragment>
+            )}
+          />
+        </div>
+      </BrowserRouter>
+      
+    );
+  }
 }
 
 export default App;
