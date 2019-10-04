@@ -12,11 +12,7 @@ export class App extends Component {
   }
 
   logIn = (email, password) => {
-    axios.post(
-      'http://localhost:3000/auth/login', 
-      {email, password}, 
-      {headers: {'Content-Type': 'application/json'}}
-    )
+    axios.post()
     .then(response => {console.log(response)})
     .catch(error => {console.log(error)});
   }
@@ -25,13 +21,26 @@ export class App extends Component {
     console.log({name, email, password, passwordConfirmation});
   }
 
+  test = () => {
+    console.log('test');
+    axios({
+      method: 'get',
+      url: 'http://localhost:3001/users/me',
+      headers: {
+        'Authorization': 'f8949ee1-c69b-40b7-a22d-815d123cb838'
+      }
+    })
+    .then(response => console.log(response));
+  }
+
   render() {
     return (
       <BrowserRouter>
         <div className="App">
+          <button onClick={this.test}>Test</button>
           <Header />
           <Route
-            exact 
+            exact
             path="/"
             render={props => (
               <React.Fragment>      

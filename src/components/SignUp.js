@@ -9,12 +9,7 @@ export class SignUp extends Component {
     passwordConfirmation: ''
   }
 
-  onChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  }
-
+  onChange = e => this.setState({ [e.target.name]: e.target.value });
   onSubmit = e => {
     e.preventDefault();
     this.props.signUp(this.state);
@@ -33,25 +28,22 @@ export class SignUp extends Component {
       <div>
         <h2>Sign Up</h2>
         <form onSubmit={this.onSubmit} >
-          <div>
             <input 
-              type="text" name="name"
+              type="text" 
+              name="name"
               placeholder="Name..."
               value={this.state.name}
               onChange={this.onChange}
               required
-            />
-          </div>
-          <div>
+            /><br/>
             <input 
-              type="email" name="email"
+              type="email" 
+              name="email"
               placeholder="Email..."
               value={this.state.email}
               onChange={this.onChange}
               required
-            />
-          </div>
-          <div>
+            /><br/>
             <input 
               type="password"
               name="password"
@@ -59,9 +51,7 @@ export class SignUp extends Component {
               value={this.state.password}
               onChange={this.onChange}
               required
-            />  
-          </div>
-          <div>
+            /><br/>
             <input 
               type="password"
               name="passwordConfirmation"
@@ -69,9 +59,11 @@ export class SignUp extends Component {
               value={this.state.passwordConfirmation}
               onChange={this.onChange}
               required
-            />  
-          </div>
-          <button type="submit" value="Submit">Sign Up</button>
+            /><br/>
+          <button 
+            type="submit" 
+            value="Submit"
+          >Sign Up</button>
           <Link to="/" onClick={this.clearState}>Log In</Link>
         </form>
       </div>
