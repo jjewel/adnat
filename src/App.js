@@ -1,23 +1,17 @@
 import React, { Component } from "react";
-// import {BrowserRouter, Route} from 'react-router-dom';
 import axios from "axios";
 import Header from "./components/Header";
 import SignUp from "./components/SignUp";
 import "./App.css";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      sessionId: "",
-      name: "",
-      email: "",
-      password: "",
-      passwordConfirmation: ""
-    };
-    this.signUp = this.signUp.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-  }
+  state = {
+    sessionId: "",
+    name: "",
+    email: "",
+    password: "",
+    passwordConfirmation: ""
+  };
 
   signUp = () => {
     const data = {
