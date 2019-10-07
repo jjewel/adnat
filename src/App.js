@@ -1,53 +1,69 @@
-import React, { Component } from "react";
-import axios from "axios";
-import Header from "./components/Header";
-import SignUp from "./components/SignUp";
-import "./App.css";
+import React, { Component } from 'react';
+import axios from 'axios';
+import Header from './components/Header';
+import SignUp from './components/SignUp';
+import UserProfile from './components/users/UserProfile';
+import './App.css';
 
 class App extends Component {
   state = {
-    sessionId: "",
-    name: "",
-    email: "",
-    password: "",
-    passwordConfirmation: ""
+    sessionId: '',
+    user: {}
   };
 
-  signUp = () => {
-    const data = {
-      name: this.state.name,
-      email: this.state.email,
-      password: this.state.password,
-      passwordConfirmation: this.state.passwordConfirmation
-    };
-
+  signUp = (name, email, password, passwordConfirmation) => {
     const request = {
-      method: "post",
-      url: "http://localhost:3001/auth/signup",
+      method: 'post',
+      url: `${process.env.REACT_APP_API_HOST}/auth/signup`,
       headers: {
-        "Content-Type": "application/json"
+        'Content-Type': 'application/json'
       },
-      data: data
+      data: {
+        name,
+        email,
+        password,
+        passwordConfirmation
+      }
     };
 
     axios(request)
       .then(response => this.setState({ sessionId: response.data.sessionId }))
-      .catch(error => alert(error));
+      .catch(response => alert(response));
   };
 
-  handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+  getUserInfo = () => {
+    const request = {
+      method: 'get',
+      url: `${process.env.REACT_APP_API_HOST}/users/me`,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `${this.state.sessionId}`
+      }
+    };
+
+    axios(request)
+      .then(response =>
+        this.setState({
+          user: {
+            id: response.data.id,
+            name: response.data.name,
+            email: response.data.email,
+            organisationId: response.data.organisationId
+          }
+        })
+      )
+      .catch(response => alert(response));
   };
 
   render() {
     return (
       <div className='app'>
         <Header />
-        <SignUp
-          signUp={this.signUp}
-          name={this.state.name}
-          email={this.state.email}
-        />
+        {this.state.sessionId ? (
+          <UserProfile getUserInfo={this.getUserInfo} user={this.state.user} />
+        ) : (
+          <SignUp signUp={this.signUp} />
+        )}
       </div>
     );
   }

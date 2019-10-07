@@ -1,12 +1,27 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-// import { Link } from 'react-router-dom';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export class SignUp extends Component {
+  state = {
+    email: '',
+    name: '',
+    password: '',
+    passwordConfirmation: ''
+  };
+
+  static propTypes = {
+    signUp: PropTypes.func.isRequired
+  };
+
   onChange = e => this.setState({ [e.target.name]: e.target.value });
   onSubmit = e => {
     e.preventDefault();
-    this.props.signUp();
+    this.props.signUp(
+      this.state.name,
+      this.state.email,
+      this.state.password,
+      this.state.passwordConfirmation
+    );
   };
 
   render() {
@@ -18,15 +33,15 @@ export class SignUp extends Component {
             type='email'
             placeholder='Email...'
             name='email'
-            value={this.props.email}
-            onChange={this.props.onChange}
+            value={this.state.email}
+            onChange={this.onChange}
           />
           <br />
           <input
             type='text'
             placeholder='Full Name...'
             name='name'
-            value={this.props.name}
+            value={this.state.name}
             onChange={this.onChange}
           />
           <br />
@@ -34,7 +49,7 @@ export class SignUp extends Component {
             type='password'
             placeholder='Password...'
             name='password'
-            value={this.props.password}
+            value={this.state.password}
             onChange={this.onChange}
           />
           <br />
@@ -42,7 +57,7 @@ export class SignUp extends Component {
             type='password'
             placeholder='Confirm Password...'
             name='passwordConfirmation'
-            value={this.props.passwordConfirmation}
+            value={this.state.passwordConfirmation}
             onChange={this.onChange}
           />
           <br />
