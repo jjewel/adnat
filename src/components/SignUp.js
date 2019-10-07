@@ -1,76 +1,62 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+// import { Link } from 'react-router-dom';
 
 export class SignUp extends Component {
-  state = {
-    name: '',
-    email: '',
-    password: '',
-    passwordConfirmation: ''
-  }
-
   onChange = e => this.setState({ [e.target.name]: e.target.value });
   onSubmit = e => {
     e.preventDefault();
-    this.props.signUp(this.state);
-    this.clearState();
-  }
-
-  clearState = () => this.setState({
-    name: '',
-    email: '',
-    password: '',
-    passwordConfirmation: ''
-  });
+    this.props.signUp();
+  };
 
   render() {
     return (
-      <div>
-        <h2>Sign Up</h2>
-        <form onSubmit={this.onSubmit} >
-            <input 
-              type="text" 
-              name="name"
-              placeholder="Name..."
-              value={this.state.name}
-              onChange={this.onChange}
-              required
-            /><br/>
-            <input 
-              type="email" 
-              name="email"
-              placeholder="Email..."
-              value={this.state.email}
-              onChange={this.onChange}
-              required
-            /><br/>
-            <input 
-              type="password"
-              name="password"
-              placeholder="Password..."
-              value={this.state.password}
-              onChange={this.onChange}
-              required
-            /><br/>
-            <input 
-              type="password"
-              name="passwordConfirmation"
-              placeholder="Confirm Password..."
-              value={this.state.passwordConfirmation}
-              onChange={this.onChange}
-              required
-            /><br/>
-          <button 
-            type="submit" 
-            value="Submit"
-          >Sign Up</button>
-          <Link to="/" onClick={this.clearState}>Log In</Link>
+      <div className='signup-container'>
+        <h2>New User</h2>
+        <form onSubmit={this.onSubmit}>
+          <input
+            type='email'
+            placeholder='Email...'
+            name='email'
+            value={this.props.email}
+            onChange={this.props.onChange}
+          />
+          <br />
+          <input
+            type='text'
+            placeholder='Full Name...'
+            name='name'
+            value={this.props.name}
+            onChange={this.onChange}
+          />
+          <br />
+          <input
+            type='password'
+            placeholder='Password...'
+            name='password'
+            value={this.props.password}
+            onChange={this.onChange}
+          />
+          <br />
+          <input
+            type='password'
+            placeholder='Confirm Password...'
+            name='passwordConfirmation'
+            value={this.props.passwordConfirmation}
+            onChange={this.onChange}
+          />
+          <br />
+          <button type='submit' value='Submit'>
+            Signup
+          </button>
         </form>
       </div>
-      
-      
-    )
+    );
   }
 }
+
+SignUp.propTypes = {
+  signUp: PropTypes.func.isRequired
+};
 
 export default SignUp;

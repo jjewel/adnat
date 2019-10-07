@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 
-export class LogIn extends Component {
+export class Header extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Adnat</h1>
-      </div>
+      <h1>Adnat</h1>
     )
   }
 }
 
-export default LogIn;
+export default Header;

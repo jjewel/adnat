@@ -32,7 +32,5 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "flow-bin": "^0.109.0"
-  }
+  "devDependencies": {}
 }
