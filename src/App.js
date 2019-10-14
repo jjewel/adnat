@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Header from './components/Header';
 import SignUp from './components/SignUp';
 import UserProfile from './components/users/UserProfile';
@@ -9,14 +9,21 @@ import './App.css';
 const App = () => {
   return (
     <AdnatState>
-      <div className='app'>
-        <Header />
-        {sessionId ? (
-          <UserProfile getUserInfo={this.getUserInfo} user={this.state.user} />
-        ) : (
-          <SignUp signUp={this.signUp} />
-        )}
-      </div>
+      <Router>
+        <div className='app'>
+          <Header />
+          <div className='container'>
+            <Switch>
+              <Route exact path='/' component={Header} />
+              <Route exact path='/signup' component={SignUp} />
+              <Route exact path='/login' component={LogIn} />
+              <Route exact path='/user/:login' component={UserProfile} />
+            </Switch>
+            <UserProfile getUserInfo={getUserInfo} user={user} />
+            <SignUp signUp={signUp} />
+          </div>
+        </div>
+      </Router>
     </AdnatState>
   );
 };

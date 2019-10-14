@@ -22,7 +22,7 @@ export default (state, action) => {
     case AUTH_SIGNUP:
       return {
         ...state,
-        user: action.payload,
+        sessionId: action.payload.sessionId,
         loading: false
       };
     case AUTH_LOGIN:
