@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 import AdnatContext from '../context/adnat/adnatContext';
 
 const NavBar = () => {
-  const adnatContext = useContext(AdnatContext);
-  const { sessionId, logOut } = adnatContext;
+  const { sessionId, logOut } = useContext(AdnatContext);
 
   return (
     <nav className='navbar bg-primary'>
@@ -15,7 +14,9 @@ const NavBar = () => {
         </li>
         <li>
           {sessionId ? (
-            <Link onClick={logOut}>Log Out</Link>
+            <Link to='/' onClick={() => logOut(sessionId)}>
+              Log Out
+            </Link>
           ) : (
             <Link to='/signup'>Sign Up</Link>
           )}

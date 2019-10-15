@@ -48,11 +48,14 @@ const SignUp = () => {
           value={passwordConfirmation}
           onChange={e => setPasswordConfirmation(e.target.value)}
         />
-        <input
-          type='submit'
-          value='Create Account'
-          className='btn btn-primary'
-        />
+        <Link to='/'>
+          <input
+            type='submit'
+            value='Create Account'
+            className='btn btn-primary'
+          />
+        </Link>
+
         <span>
           <Link className='p' to='/'>
             Existing User...

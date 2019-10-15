@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import AdnatContext from '../context/adnat/adnatContext';
 
 const SignIn = () => {
+  const { signIn } = useContext(AdnatContext);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   const onSubmit = e => {
     e.preventDefault();
+    signIn(email, password);
   };
 
   return (
@@ -15,12 +21,16 @@ const SignIn = () => {
           autoComplete='email'
           name='email'
           placeholder='Email...'
+          value={email}
+          onChange={e => setEmail(e.target.value)}
         />
         <input
           type='password'
           autoComplete='current-password'
           name='password'
           placeholder='Password...'
+          value={password}
+          onChange={e => setPassword(e.target.value)}
         />
         <input type='submit' value='Sign in' className='btn btn-primary' />
         <span>

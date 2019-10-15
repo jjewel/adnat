@@ -32,7 +32,17 @@ export default (state, action) => {
         loading: false
       };
     case AUTH_LOGIN:
+      return {
+        ...state,
+        sessionId: action.payload.sessionId,
+        loading: false
+      };
     case AUTH_LOGOUT:
+      return {
+        ...state,
+        sessionId: '',
+        loading: false
+      };
     case ORGS_GET:
     case ORGS_CREATE_JOIN:
     case ORGS_JOIN:

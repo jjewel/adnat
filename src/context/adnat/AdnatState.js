@@ -18,7 +18,8 @@ import {
   USERS_GET,
   USERS_GET_INFO,
   USERS_UPDATE_INFO,
-  USERS_CHANGE_PASSWORD
+  USERS_CHANGE_PASSWORD,
+  SET_LOADING
 } from '../types';
 
 const AdnatState = props => {
@@ -47,9 +48,33 @@ const AdnatState = props => {
     };
 
     const response = await axios(request);
-    console.log(response.data);
+    console.log(response);
+
     dispatch({
       type: AUTH_SIGNUP,
+      payload: response.data
+    });
+  };
+
+  const signIn = async (email, password) => {
+    setLoading();
+    const request = {
+      method: 'post',
+      url: `${process.env.REACT_APP_API_HOST}/auth/login`,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: {
+        email,
+        password
+      }
+    };
+
+    const response = await axios(request);
+    console.log(response);
+
+    dispatch({
+      type: AUTH_LOGIN,
       payload: response.data
     });
   };
@@ -71,8 +96,22 @@ const AdnatState = props => {
     });
   };
 
-  const logOut = () => {
-    console.log('logging out...');
+  const logOut = async sessionId => {
+    setLoading();
+    const request = {
+      method: 'delete',
+      url: `${process.env.REACT_APP_API_HOST}/auth/logout`,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `${sessionId}`
+      }
+    };
+
+    const response = await axios(request);
+    console.log(response);
+    if (response.status === 200) {
+      dispatch({ type: AUTH_LOGOUT });
+    }
   };
 
   const setLoading = () => dispatch({ type: SET_LOADING });
@@ -83,6 +122,7 @@ const AdnatState = props => {
         sessionId: state.sessionId,
         user: state.user,
         signUp,
+        signIn,
         logOut,
         getUserInfo
       }}

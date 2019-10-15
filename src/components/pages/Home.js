@@ -4,8 +4,7 @@ import Account from '../Account';
 import AdnatContext from '../../context/adnat/adnatContext';
 
 const Home = () => {
-  const adnatContext = useContext(AdnatContext);
-  const { sessionId } = adnatContext;
+  const { sessionId } = useContext(AdnatContext);
   return <div>{sessionId ? <Account /> : <SignIn />}</div>;
 };
 
