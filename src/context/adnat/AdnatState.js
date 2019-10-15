@@ -46,7 +46,7 @@ const AdnatState = props => {
     };
 
     const response = await axios(request);
-
+    console.log(response.data);
     dispatch({
       type: AUTH_SIGNUP,
       payload: response.data
