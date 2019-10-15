@@ -1,3 +1,6 @@
+// App
+export const SET_LOADING = 'SET_LOADING';
+
 // Authorisation
 export const AUTH_SIGNUP = 'AUTH_SIGNUP';
 export const AUTH_LOGIN = 'AUTH_LOGIN';

@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import AdnatContext from '../context/adnat/adnatContext';
+import { Link } from 'react-router-dom';
 
 const SignUp = () => {
   const adnatContext = useContext(AdnatContext);
@@ -21,24 +22,28 @@ const SignUp = () => {
         <h2 className='text-center'>Sign Up</h2>
         <input
           type='text'
+          autoComplete='name'
           placeholder='Name...'
           value={name}
           onChange={e => setName(e.target.value)}
         />
         <input
           type='email'
+          autoComplete='email'
           placeholder='Email...'
           value={email}
           onChange={e => setEmail(e.target.value)}
         />
         <input
           type='password'
+          autoComplete='new-password'
           placeholder='Password...'
           value={password}
           onChange={e => setPassword(e.target.value)}
         />
         <input
           type='password'
+          autoComplete='new-password'
           placeholder='Confirm Password...'
           value={passwordConfirmation}
           onChange={e => setPasswordConfirmation(e.target.value)}
@@ -48,6 +53,11 @@ const SignUp = () => {
           value='Create Account'
           className='btn btn-primary'
         />
+        <span>
+          <Link className='p' to='/'>
+            Existing User...
+          </Link>
+        </span>
       </form>
     </div>
   );

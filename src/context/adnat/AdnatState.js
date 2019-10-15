@@ -31,6 +31,7 @@ const AdnatState = props => {
   const [state, dispatch] = useReducer(AdnatReducer, initialState);
 
   const signUp = async (name, email, password, passwordConfirmation) => {
+    setLoading();
     const request = {
       method: 'post',
       url: `${process.env.REACT_APP_API_HOST}/auth/signup`,
@@ -70,12 +71,19 @@ const AdnatState = props => {
     });
   };
 
+  const logOut = () => {
+    console.log('logging out...');
+  };
+
+  const setLoading = () => dispatch({ type: SET_LOADING });
+
   return (
     <AdnatContext.Provider
       value={{
         sessionId: state.sessionId,
         user: state.user,
         signUp,
+        logOut,
         getUserInfo
       }}
     >

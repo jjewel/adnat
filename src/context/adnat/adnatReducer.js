@@ -14,11 +14,17 @@ import {
   USERS_GET,
   USERS_GET_INFO,
   USERS_UPDATE_INFO,
-  USERS_CHANGE_PASSWORD
+  USERS_CHANGE_PASSWORD,
+  SET_LOADING
 } from '../types';
 
 export default (state, action) => {
   switch (action.type) {
+    case SET_LOADING:
+      return {
+        ...state,
+        loading: true
+      };
     case AUTH_SIGNUP:
       return {
         ...state,
