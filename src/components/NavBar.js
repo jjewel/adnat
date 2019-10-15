@@ -1,0 +1,20 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+const NavBar = () => {
+  return (
+    <nav className='navbar bg-primary'>
+      <h1>Adnat</h1>
+      <ul>
+        <li>
+          <Link to='/'>Home</Link>
+        </li>
+        <li>
+          <Link to='/login'>Log In</Link>
+        </li>
+      </ul>
+    </nav>
+  );
+};
+
+export default NavBar;

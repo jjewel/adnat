@@ -53,13 +53,13 @@ const AdnatState = props => {
     });
   };
 
-  const getUserInfo = async () => {
+  const getUserInfo = async sessionId => {
     const request = {
       method: 'get',
       url: `${process.env.REACT_APP_API_HOST}/users/me`,
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `${this.state.sessionId}`
+        Authorization: `${sessionId}`
       }
     };
 

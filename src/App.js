@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Header from './components/Header';
-import SignUp from './components/SignUp';
-import UserProfile from './components/users/UserProfile';
+import NavBar from './components/NavBar';
+import Home from './components/pages/Home';
+import LogIn from './components/LogIn';
 import AdnatState from './context/adnat/AdnatState';
 import './App.css';
 
@@ -10,17 +10,13 @@ const App = () => {
   return (
     <AdnatState>
       <Router>
-        <div className='app'>
-          <Header />
+        <div className='App'>
+          <NavBar />
           <div className='container'>
             <Switch>
-              <Route exact path='/' component={Header} />
-              <Route exact path='/signup' component={SignUp} />
+              <Route exact path='/' component={Home} />
               <Route exact path='/login' component={LogIn} />
-              <Route exact path='/user/:login' component={UserProfile} />
             </Switch>
-            <UserProfile getUserInfo={getUserInfo} user={user} />
-            <SignUp signUp={signUp} />
           </div>
         </div>
       </Router>
